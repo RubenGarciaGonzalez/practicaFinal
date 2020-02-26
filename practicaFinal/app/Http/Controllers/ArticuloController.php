@@ -56,7 +56,6 @@ class ArticuloController extends Controller
 
         $articulo->save();
         return redirect()->route('articulos.index')->with('mensaje', 'Articulo Creado!');
-
     }
 
     /**

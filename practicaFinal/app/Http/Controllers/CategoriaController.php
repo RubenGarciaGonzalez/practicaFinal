@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Categoria;
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoriaRequest;
+use Illuminate\Support\Facades\Storage;
 
 class CategoriaController extends Controller
 {
@@ -14,7 +16,8 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        //
+        $categorias = Categoria::orderBy('nombre')->paginate(3);
+        return view('categorias.index', compact('categorias'));
     }
 
     /**
@@ -24,7 +27,7 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('categorias.create');
     }
 
     /**
@@ -33,9 +36,13 @@ class CategoriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoriaRequest $request)
     {
-        //
+        $datos=$request->validated();
+        $categoria = new Categoria();
+        $categoria->nombre=\ucwords($datos['nombre']);
+        $categoria->save();
+        return redirect()->route('categorias.index')->with('mensaje', 'Categoria Creado!');
     }
 
     /**
@@ -46,7 +53,7 @@ class CategoriaController extends Controller
      */
     public function show(Categoria $categoria)
     {
-        //
+        return view('categorias.detalle', compact('categoria'));
     }
 
     /**
@@ -57,7 +64,7 @@ class CategoriaController extends Controller
      */
     public function edit(Categoria $categoria)
     {
-        //
+        return view('categorias.edit', compact('categoria'));
     }
 
     /**
@@ -69,7 +76,13 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, Categoria $categoria)
     {
-        //
+        $request->validate([
+            'nombre'=>['required', 'unique:categorias,nombre,'.$categoria->nombre]
+        ]);
+
+        $categoria->nombre=ucwords($request->nombre);
+        $categoria->update($request->all());
+        return redirect()->route('categorias.index')->with('mensaje', 'Categoria modificada!!');
     }
 
     /**
@@ -80,6 +93,7 @@ class CategoriaController extends Controller
      */
     public function destroy(Categoria $categoria)
     {
-        //
+        $categoria->delete();
+        return redirect()->route('categorias.index')->with('mensaje', 'Categoria borrada!');
     }
 }

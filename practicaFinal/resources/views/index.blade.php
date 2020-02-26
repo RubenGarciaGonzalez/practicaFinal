@@ -13,6 +13,7 @@
     <img src="{{asset('img/articulos/amazon.jpg')}}" width="600px" height="500px">
     <br><br>
     <a href="{{route('articulos.index')}}" class="btn btn-info mr-1">Articulos</a>
+    <a href="{{route('categorias.index')}}" class="btn btn-info ml-1">Categorias</a>
     <a href="{{route('vendedores.index')}}" class="btn btn-info ml-1">Vendedores</a>
     </div>
 </body>

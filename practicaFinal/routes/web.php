@@ -12,5 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('index');
+})->name('index');
+
+Route::resource('articulos', 'ArticuloController');
+Route::resource('vendedores', 'ArticuloController');

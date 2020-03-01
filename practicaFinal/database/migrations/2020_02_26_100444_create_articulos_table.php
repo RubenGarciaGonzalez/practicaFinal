@@ -20,6 +20,12 @@ class CreateArticulosTable extends Migration
             $table->float('precio', 5,2);
             $table->string('foto')->default('/img/articulos/default.jpg');
             $table->string('detalles');
+            $table->bigInteger('categoria_id')->unsigned()->nullable();
+            $table->foreign('categoria_id')
+                ->references('id')
+                ->on('categorias')
+                ->onDelete('set null')
+                ->onUpdate('cascade');
             $table->timestamps();
         });
     }

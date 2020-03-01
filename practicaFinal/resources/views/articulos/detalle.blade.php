@@ -19,6 +19,7 @@
             <p><b>Nombre:</b> {{$articulo->nombre}}</p>
             <p><b>Stock:</b> {{$articulo->stock}}</p>
             <p><b>Precio:</b> {{$articulo->precio}} €</p>
+            <p><b>Categoria:</b> {{$articulo->categoria->nombre}} </p>
             <label for="detalles"><b>Detalles:</b></label>
             <br>
             <textarea style="resize: none" name="detalles" id="detalles" cols="50" rows="5" readonly>{{$articulo->detalles}}</textarea>

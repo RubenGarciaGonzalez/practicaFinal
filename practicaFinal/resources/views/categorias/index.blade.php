@@ -12,7 +12,7 @@ Categorias Disponibles
 <div class="container">
         <a href="{{route('categorias.create')}}" class="btn btn-dark mb-3"><i class="fa fa-plus mr-2"></i>Añadir categoria</a>
 </div>
-<table class="table table-striped table-dark mt-3">
+<table class="table text-center table-striped table-dark mt-3">
     <thead>
       <tr>
         <th scope="col">Detalles</th>
@@ -40,8 +40,8 @@ Categorias Disponibles
      @endforeach
     </tbody>
   </table>
+  {{$categorias->appends(Request::except('page'))->links()}}
   <div class="text-center">
     <a href="{{route('index')}}" class="btn btn-dark mb-3"><i class="fa fa-home fa-3x"></i></a>      
   </div>
-  {{$categorias->appends(Request::except('page'))->links()}}
 @endsection

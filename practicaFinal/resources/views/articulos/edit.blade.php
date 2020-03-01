@@ -47,6 +47,20 @@
                     <input type="text" class="form-control" name="detalles" value="{{$articulo->detalles}}" id="detalles" required>
                 </div>
             </div>
+            <div class="form-row">
+                <div class="col">
+                    <label for="categorias" class="col-form-label">Categoría:</label><br>
+                    <select name="categoria_id" class="form-control">
+                        @foreach ($categorias as $item)
+                            @if($articulo->categoria_id==$item->id)
+                                <option value="{{$item->id}}" selected>{{$item->nombre}}</option>  
+                            @else
+                            <option value="{{$item->id}}">{{$item->nombre}}</option>  
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
+            </div>
             <div class="form-row text-center mt-3">
                 <div class="col">
                     <input type="submit" value="Guardar" class="btn btn-success mr-2">

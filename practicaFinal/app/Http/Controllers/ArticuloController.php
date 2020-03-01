@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Articulo;
+use App\Categoria;
 use Illuminate\Http\Request;
 use App\Http\Requests\ArticuloRequest;
 use Illuminate\Support\Facades\Storage;
@@ -15,10 +16,15 @@ class ArticuloController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $articulos = Articulo::orderBy('id')->paginate(3);
-        return view('articulos.index', compact('articulos'));
+        $categorias = Categoria::orderBy('nombre')->get();
+        $miCategoria = $request->get('categoria_id');
+
+        $articulos = Articulo::orderBy('id')
+        ->categoria_id($miCategoria)
+        ->paginate(3);
+        return view('articulos.index', compact('articulos', 'categorias', 'request'));
     }
 
     /**
@@ -28,7 +34,9 @@ class ArticuloController extends Controller
      */
     public function create()
     {
-        return view('articulos.create');
+        $categorias = Categoria::orderBy('nombre')->get();
+
+        return view('articulos.create', compact('categorias'));
     }
 
     /**
@@ -45,6 +53,9 @@ class ArticuloController extends Controller
         $articulo->precio = $datos['precio'];
         $articulo->stock = $datos['stock'];
         $articulo->detalles = $datos['detalles'];
+        if ($datos['categoria_id']!="%") {
+            $articulo->categoria_id=$datos['categoria_id'];
+        }
 
         if (isset($datos['foto']) && $datos['foto']!=null) {
 
@@ -66,7 +77,9 @@ class ArticuloController extends Controller
      */
     public function show(Articulo $articulo)
     {
-        return view('articulos.detalle', \compact('articulo'));
+        $categorias = Categoria::orderBy('nombre')->get();
+
+        return view('articulos.detalle', \compact('articulo', 'categorias'));
     }
 
     /**
@@ -77,7 +90,9 @@ class ArticuloController extends Controller
      */
     public function edit(Articulo $articulo)
     {
-        return view('articulos.edit', compact('articulo'));
+        $categorias = Categoria::orderBy('nombre')->get();
+
+        return view('articulos.edit', compact('articulo', 'categorias'));
     }
 
     /**
@@ -90,9 +105,10 @@ class ArticuloController extends Controller
     public function update(Request $request, Articulo $articulo)
     {
         $request->validate([
-            'nombre'=>['required', 'unique:articulos,nombre,'.$articulo->nombre],
+            'nombre'=>['required', 'unique:articulos,nombre,'.$articulo->id],
             'stock'=>['required'],
             'precio'=>['required'],
+            'categoria_id'=>['nullable'],
             'detalles'=>['required']
         ]);
 
@@ -100,6 +116,7 @@ class ArticuloController extends Controller
         $articulo->stock=$request->stock;
         $articulo->precio=$request->precio;
         $articulo->detalles=$request->detalles;
+        $articulo->categoria_id=$request->categoria_id;
 
         if ($request->has('foto')) {
 

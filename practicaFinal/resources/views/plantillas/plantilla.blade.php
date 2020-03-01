@@ -6,9 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href='{{asset('css/font-awesome/css/font-awesome.min.css')}}' >
+    <link rel="icon" href="{{asset('img/fondo/icon.png')}}">
     <title>@yield('titulo')</title>
 </head>
-<body style="background: salmon">
+<body style="background:url('{{asset('img/fondo/default.jpg')}}')">
     <h3 class="text-center mt-3">@yield('cabecera')</h3>
     <div class="container mt-3">
         @yield('contenido')

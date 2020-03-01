@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Vendedor;
+use Illuminate\Support\Facades\DB;
+
 
 class VendedorSeeder extends Seeder
 {
@@ -11,6 +14,10 @@ class VendedorSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Vendedor::create([
+            'nombre'=>'Ruben',
+            'apellidos'=>'Garcia Gonzalez',
+            'edad'=>'20'
+        ]);
     }
 }

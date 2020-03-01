@@ -13,13 +13,17 @@ class ArticuloSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('articulos')->truncate(); 
-
+        
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('articulos')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        
         Articulo::create([
             'nombre'=>'PSP',
             'stock'=>'31',
             'precio'=>'99.12',
-            'detalles'=>'Consola antigua que sirve para poco la verdad'
+            'detalles'=>'Consola antigua que sirve para poco la verdad',
+            'categoria_id'=>'5'
         ]);
     }
 }

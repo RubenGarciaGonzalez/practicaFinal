@@ -28,6 +28,7 @@ class ArticuloRequest extends FormRequest
             'precio'=>['required'],
             'stock'=>['required'],
             'detalles'=>['required'],
+            'categoria_id'=>['nullable'],
             'foto'=>['nullable', 'image']
         ];
     }

@@ -23,27 +23,38 @@
             <div class="form-row">
                 <div class="col">
                     <label for="nom" class="col-form-label">Nombre</label>
-                    <input type="text" class="form-control" name="nombre" placeholder="Nombre" id="nom" required>
+                    <input type="text" class="form-control" name="nombre" value="{{old('nombre')}}" placeholder="Nombre" id="nom" required>
                 </div>
                 <div class="col">
                     <label for="stock" class="col-form-label">Stock</label>
-                    <input type="number" class="form-control" name="stock" placeholder="Stock" id="stock" min="1" step="1" required>
+                    <input type="number" class="form-control" name="stock" value="{{old('stock')}}" placeholder="Stock" id="stock" min="1" step="1" required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col">
                     <label for="precio" class="col-form-label">Precio</label>
-                    <input type="number" class="form-control" name="precio" placeholder="Precio(€)" id="precio" min="1" step="0.01" required>
+                    <input type="number" class="form-control" name="precio" value="{{old('precio')}}"  placeholder="Precio(€)" id="precio" min="1" step="0.01" required>
                 </div>
                 <div class="col">
                     <label for="foto" class="col-form-label">Foto</label>
                     <input type="file" class="form-control p-1" name="foto" accept="image/*" id="foto">
                 </div>
             </div>
+            <div class="form-row">
+                <div class="col">
+                    <label for="categorias" class="col-form-label">Categoría:</label><br>
+                        <select name='categoria_id' class="form-control">
+                            <option value="%" selected>Sin categoría</option>
+                                @foreach ($categorias as $item)
+                                    <option value="{{$item->id}}">{{$item->nombre}}</option>   
+                                @endforeach
+                        </select>
+                    </div>
+            </div>
             <div class="form-row text-center">
                 <div class="col">
                     <label for="detalles" class="col-form-label">Detalles</label><br>
-                    <textarea style="resize: none" name="detalles" id="detalles" cols="90" rows="3"></textarea>
+                    <textarea style="resize: none" name="detalles" value="{{old('detalles')}}" id="detalles" cols="90" rows="3"></textarea>
                 </div>
             </div>
             <div class="form-row text-center mt-3">

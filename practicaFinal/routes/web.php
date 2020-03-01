@@ -15,7 +15,11 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
+Route::get('vendedores/{vendedore}/venta', 'VendedorController@venta')->name('vendedores.venta');
+Route::get('vendedores/{vendedore}/verVentas', 'VendedorController@verVentas')->name('vendedores.verVentas');
 
 Route::resource('categorias', 'CategoriaController');
 Route::resource('articulos', 'ArticuloController');
 Route::resource('vendedores', 'VendedorController');
+
+Route::post('vendedor', 'VendedorController@ventaCompletada')->name('vendedores.ventaCompletada');

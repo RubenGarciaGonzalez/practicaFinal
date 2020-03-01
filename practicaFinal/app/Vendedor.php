@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Vendedor;
+use App\Articulo;
 
 class Vendedor extends Model
 {
@@ -18,6 +20,21 @@ class Vendedor extends Model
             $sum+=$item->pivot->cantidad;
         }
         return $sum;
+    }
+
+    public function masVendido(Vendedor $vendedor){
+        //Este método no funciona del todo bien.
+        $flag = false;
+        $numeroUno = $vendedor;
+        $best = $numeroUno;
+        $vendedores = Vendedor::all();
+
+        for ($i=0; $i < count($vendedores) ; $i++) { 
+            if ($vendedores[$i]->sumaVentas() >= $numeroUno->sumaVentas()) {
+                $best = $vendedores[$i];
+            }
+        }
+        return "$best->nombre $best->apellidos";
     }
 
 }

@@ -17,9 +17,13 @@ class VendedorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $vendedores = Vendedor::orderBy('apellidos')->paginate(3);
+        $miArticulo = $request->get('articulo_id');
+        
+        $vendedores = Vendedor::orderBy('apellidos')
+        ->paginate(3);
+
         return view('vendedores.index', compact('vendedores'));
     }
 

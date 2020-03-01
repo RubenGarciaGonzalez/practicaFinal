@@ -10,7 +10,7 @@ Vendedores de AmazonES
 <p class="alert alert-success my-3">{{$texto}}</p>
 @endif
 <div class="container">
-        <a href="{{route('vendedores.create')}}" class="btn btn-dark mb-3"><i class="fa fa-plus mr-2"></i>Añadir Vendedor</a>
+  <a href="{{route('vendedores.create')}}" class="btn btn-dark mb-3"><i class="fa fa-plus mr-2"></i>Añadir Vendedor</a>
 </div>
 <table class="table text-center table-striped table-dark mt-3">
     <thead>
@@ -46,6 +46,9 @@ Vendedores de AmazonES
      @endforeach
     </tbody>
   </table>
+  <div class="text-center my-3">
+    <h2 class="font-italic">El vendedor con más ventas es {{$vendedor->masVendido($vendedor)}}</h2>
+  </div>
   {{$vendedores->appends(Request::except('page'))->links()}}
   <div class="text-center">
     <a href="{{route('index')}}" class="btn btn-dark mb-3"><i class="fa fa-home fa-3x"></i></a>      

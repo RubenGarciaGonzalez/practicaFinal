@@ -42,10 +42,6 @@
                     <label for="edad" class="col-form-label">Edad</label>
                     <input type="number" class="form-control" name="edad" value="{{$vendedore->edad}}" id="edad" min="18" step="1" required>
                 </div>
-                <div class="col">
-                        <label for="ventas" class="col-form-label">NºVentas</label>
-                        <input type="number" class="form-control" name="num_ventas" value="{{$vendedore->num_ventas}}" id="ventas" min="1" step="1" required>
-                </div>
             </div>
             <div class="form-row text-center mt-3">
                 <div class="col">
